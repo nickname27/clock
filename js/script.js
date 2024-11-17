@@ -14,8 +14,12 @@ function clock() {
   min.style = `transform: rotate(${minutes}deg);`;
   hour.style = `transform: rotate(${hours}deg);`;
 
-  hoursNumber.innerHTML = time.getHours() < 10 ? "0" : time.getHours();
-  minutesNumber.innerHTML = time.getMinutes() < 10 ? "0" : time.getMinutes();
+  hoursNumber.innerHTML = time.getHours() < 10
+    ? "0" + time.getHours()
+    : time.getHours();
+  minutesNumber.innerHTML = time.getMinutes() < 10
+    ? "0" + time.getMinutes()
+    : time.getMinutes();
 
   setTimeout(() => clock(), 1000);
 }
