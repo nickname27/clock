@@ -37,9 +37,11 @@ links.forEach((item, i, array) => {
   });
 });
 
+
 const stopwatchHours = document.querySelector(".stopwatch__hours"),
   stopwatchMinutes = document.querySelector(".stopwatch__minutes"),
   stopwatchSeconds = document.querySelector(".stopwatch__seconds"),
+  stopwatchMilSeconds = document.querySelector(".stopwatch__milSeconds"),
   stopwatchBtn = document.querySelector(".stopwatch__btn"),
   stopwatchCont = document.querySelector(".stopwatch__cont"),
   indicator = document.querySelector(".tabsLink__span");
@@ -57,36 +59,41 @@ stopwatchBtn.addEventListener("click", () => {
     stopwatchBtn.innerHTML = "start";
     indicator.classList.remove("active_clear");
     stopwatchCont.classList.remove("active");
+    stopwatchSeconds.innerHTML = 0;
+    stopwatchMinutes.innerHTML = 0;
+    stopwatchHours.innerHTML = 0;
+    stopwatchMilSeconds.innerHTML = 0;
   }
 });
 
 stopwatchCont.addEventListener("click", () => {
   stopwatchBtn.innerHTML = "stop";
+  indicator.classList.add("active");
 });
 
 function stopwatch() {
   setInterval(() => {
     if (stopwatchBtn.innerHTML == "stop") {
-      if (stopwatchSeconds.innerHTML < 59) {
-        stopwatchSeconds.innerHTML++;
-      } else if (stopwatchSeconds.innerHTML == 59) {
-        stopwatchSeconds.innerHTML = 0;
-        if (stopwatchMinutes.innerHTML < 59) {
-          stopwatchMinutes.innerHTML++;
-        } else if (stopwatchMinutes.innerHTML == 59) {
-          stopwatchMinutes.innerHTML = 0;
-          stopwatchHours.innerHTML++;
+      if (stopwatchMilSeconds.innerHTML < 99) {
+        stopwatchMilSeconds.innerHTML++
+        if (stopwatchMilSeconds.innerHTML == 99) {
+          stopwatchMilSeconds.innerHTML = 0
+          if (stopwatchSeconds.innerHTML < 59) {
+            stopwatchSeconds.innerHTML++
+          } else if (stopwatchSeconds.innerHTML == 59) {
+            stopwatchSeconds.innerHTML = 0
+            if (stopwatchMinutes.innerHTML < 59) {
+              stopwatchMinutes.innerHTML++
+            } else if (stopwatchMinutes.innerHTML == 59) {
+              stopwatchMinutes.innerHTML = 0
+              stopwatchHours.innerHTML++
+            }
+          }
         }
       }
     } else if (stopwatchBtn.innerHTML == "clear") {
       stopwatchSeconds.innerHTML;
-    } else if (stopwatchBtn.innerHTML == "start") {
-      stopwatchSeconds.innerHTML = 0;
-      stopwatchMinutes.innerHTML = 0;
-      stopwatchHours.innerHTML = 0;
     }
-  }, 1000);
+  }, 10);
 }
-setTimeout(() => {
-  stopwatch()
-}, 1000);
+stopwatch()

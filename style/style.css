@@ -293,6 +293,10 @@ body {
     margin: 0 5px;
 }
 
+.stopwatch__clock-description-ms{
+    display: none;
+}
+
 .stopwatch__clock {
     display: flex;
     margin-bottom: 50px;
